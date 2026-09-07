@@ -190,14 +190,3 @@ from the partner consultancy.
 MIT — see `LICENSE`.
 
 ---
-
-## Open items before publishing
-
-*Delete this section once resolved.*
-
-- [ ] Reconcile ρ: 0.27 on the poster/handout vs 0.29 in the thesis text
-- [ ] Confirm with the industry supervisor whether the claim count, the
-      consultancy name, and the finding figures can be stated publicly
-- [ ] Fill in the real AIDA/TIX invocation flags and the compiler version used
-- [ ] Add `figures/pipeline_diagram.png` (referenced above)
-- [ ] Add the schema-only data dictionary to `docs/`
