@@ -1,0 +1,39 @@
+# Data - never commit
+*.csv
+*.xlsx
+*.xls
+*.rds
+*.RData
+*.RDataTmp*
+*.xml
+*.dat
+data/
+raw/
+outputs/
+aida_run/
+
+# R session junk
+.Rhistory
+.Rapp.history
+.Ruserdata
+.Renviron
+.Rproj.user/
+
+# Credentials and local config
+.httr-oauth
+.secrets/
+gargle-oauth/
+config.R
+*.pem
+*.key
+
+# OS junk
+.DS_Store
+Thumbs.db
+
+# Compiled binaries
+*.o
+*.so
+*.dylib
+aida
+tix
