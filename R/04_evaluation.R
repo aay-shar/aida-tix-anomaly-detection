@@ -382,3 +382,41 @@ if (isTRUE(RUN_TOPBOTTOM_EXTRACT)) {
   cat("\nWrote top_bottom_claims.xlsx (union + 4 per-bucket sheets)\n")
   
 } # end RUN_TOPBOTTOM_EXTRACT
+# =====================================================================
+# 15. SUMMARY METRICS FOR THE REPORT   (writes results/summary.json)
+# =====================================================================
+# Aggregate numbers only, no per-claim data. Read by evaluation.qmd.
+# Needs the compare block, the rules benchmark and TIX to have run.
+if (exists("spearman") && exists("auc") && exists("tix_contrib")) {
+
+  feat_total <- colSums(abs(tix_contrib))
+  tix_share <- tibble::tibble(feature = names(feat_total), total = feat_total) %>%
+    dplyr::left_join(out$feature_manifest, by = "feature") %>%
+    dplyr::group_by(source) %>%
+    dplyr::summarise(total = sum(total), .groups = "drop") %>%
+    dplyr::mutate(share = total / sum(total))
+  share_of <- function(s) {
+    v <- tix_share$share[tix_share$source == s]
+    if (length(v) == 0) 0 else round(v, 3)
+  }
+
+  summary_metrics <- list(
+    n_claims          = nrow(comparison),
+    spearman_rho      = round(spearman, 3),
+    top100_overlap    = overlap_at(min(100, nrow(comparison))),
+    auc_vs_rules      = round(auc, 3),
+    top100_no_rule    = nrow(aida_top_no_rule),
+    tix_share_onehot  = share_of("onehot_categorical"),
+    tix_share_missing = share_of("missingness_flag"),
+    tix_share_numeric = share_of("numeric"),
+    tix_share_freq    = share_of("freq_encoded_categorical")
+  )
+
+  dir.create("results", showWarnings = FALSE)
+  jsonlite::write_json(summary_metrics, "results/summary.json",
+                       auto_unbox = TRUE, pretty = TRUE)
+  cat("Wrote results/summary.json\n")
+
+} else {
+  message("Summary metrics not written: run the compare, rules benchmark and TIX blocks first.")
+}

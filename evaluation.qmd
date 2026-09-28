@@ -1,0 +1,26 @@
+---
+title: "Evaluation"
+---
+
+```{r}
+#| echo: false
+s <- jsonlite::fromJSON("results/summary.json")
+```
+
+The numbers on this page are written by `R/04_evaluation.R` to `results/summary.json`. The claims data is proprietary and not in the repository, so the report renders from that summary file and from the figures produced by `R/05_figures.R`.
+
+## The two detectors disagree
+
+Spearman rank correlation between AIDA and Isolation Forest scores is `r s$spearman_rho`, and `r s$top100_overlap` claim(s) appear in both top-100 lists.
+
+![](figures/score_comparison.png)
+
+## AIDA against the rule engine
+
+AUC against the held-out rules is `r s$auc_vs_rules`. `r s$top100_no_rule` of AIDA's top 100 claims fired no rule at all, which is the point: the two systems surface different claims.
+
+## What drives the scores
+
+TIX attributes `r round(100 * s$tix_share_onehot)`% of the score mass to one-hot categoricals, `r round(100 * s$tix_share_missing)`% to missingness flags and `r round(100 * s$tix_share_numeric)`% to numeric features.
+
+![](figures/tix_attribution.png)

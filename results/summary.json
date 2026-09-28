@@ -1,0 +1,10 @@
+
+{
+  "spearman_rho": 0.29,
+  "top100_overlap": 1,
+  "auc_vs_rules": 0.46,
+  "top100_no_rule": 28,
+  "tix_share_onehot": 0.6,
+  "tix_share_missing": 0.26,
+  "tix_share_numeric": 0.13
+}
