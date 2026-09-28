@@ -1,0 +1,23 @@
+project:
+  type: website
+  output-dir: docs
+  render:
+    - index.qmd
+    - evaluation.qmd
+
+website:
+  title: "Explainable Anomaly Detection for Motor Insurance Claims"
+  navbar:
+    left:
+      - href: index.qmd
+        text: Overview
+      - href: evaluation.qmd
+        text: Evaluation
+    right:
+      - icon: github
+        href: https://github.com/aay-shar/aida-tix-anomaly-detection
+
+format:
+  html:
+    theme: cosmo
+    toc: true

@@ -37,3 +37,6 @@ Thumbs.db
 *.dylib
 aida
 tix
+
+/.quarto/
+**/*.quarto_ipynb

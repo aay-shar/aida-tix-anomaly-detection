@@ -60,11 +60,9 @@ benchmark measures *agreement and disagreement*, not accuracy.
 
 ## Findings
 
-> **Note:** figures below are placeholders pending a final reconciliation pass —
-> fill in from the thesis before publishing. See "Open items" at the bottom.
 
 **The two detectors disagree almost completely.** Spearman rank correlation
-between AIDA and Isolation Forest across all claims is ρ ≈ `[0.27 / 0.29 — reconcile]`,
+between AIDA and Isolation Forest across all claims is ρ ≈ 0.27,
 and only one claim appears in both methods' top 100. This is a property of the
 algorithm family, not a defect: the two use different notions of "far from
 normal", so on high-dimensional mixed-type data they surface different claims.
@@ -140,8 +138,8 @@ pipeline pauses for the C++ binaries.
 ## Running it
 
 ```r
-install.packages(c("dplyr", "tidyr", "stringr", "lubridate", "purrr", "tibble",
-                   "forcats", "naniar", "skimr", "ggplot2", "writexl", "isotree"))
+install.packages("renv")
+renv::restore()
 ```
 
 Copy `config_example.R` to `config.R` and set `data_dir` to your data location.
